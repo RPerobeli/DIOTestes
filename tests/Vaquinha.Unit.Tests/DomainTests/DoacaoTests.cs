@@ -33,6 +33,25 @@ namespace Vaquinha.Unit.Tests.DomainTests
             var valido = doacao.Valido();
 
             // Assert
+            //Assert.True(valido);
+            valido.Should().BeTrue(because: "os campos foram preenchidos corretamente");
+            doacao.ErrorMessages.Should().BeEmpty();
+        }
+
+        [Fact]
+        [Trait("Doacao", "DoacaoValida_ComTaxa")]
+        public void DoacaoValida_ComTaxa()
+        {
+            // Arrange
+            var doacao = _doacaoFixture.DoacaoValida();
+            doacao.AdicionarEnderecoCobranca(_enderecoFixture.EnderecoValido());
+            doacao.AdicionarFormaPagamento(_cartaoCreditoFixture.CartaoCreditoValido());
+
+            // Act
+            var valido = doacao.Valido();
+
+            // Assert
+            //Assert.True(valido);
             valido.Should().BeTrue(because: "os campos foram preenchidos corretamente");
             doacao.ErrorMessages.Should().BeEmpty();
         }
