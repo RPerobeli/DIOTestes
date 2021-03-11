@@ -20,6 +20,9 @@ namespace Vaquinha.Domain.ViewModels
 
         public decimal Valor { get; set; }
 
+        [DisplayName("Aceita taxa?")]
+        public bool AceitaTaxa { get; set; }
+
         public DateTime DataHora { get; set; }
 
         [DisplayName("Quando?")]
