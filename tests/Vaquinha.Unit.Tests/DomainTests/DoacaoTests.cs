@@ -43,7 +43,8 @@ namespace Vaquinha.Unit.Tests.DomainTests
         public void DoacaoValida_ComTaxa()
         {
             // Arrange
-            var doacao = _doacaoFixture.DoacaoValida();
+            var doacao = _doacaoFixture.DoacaoValida(aceitaTaxa: true);
+            
             doacao.AdicionarEnderecoCobranca(_enderecoFixture.EnderecoValido());
             doacao.AdicionarFormaPagamento(_cartaoCreditoFixture.CartaoCreditoValido());
 

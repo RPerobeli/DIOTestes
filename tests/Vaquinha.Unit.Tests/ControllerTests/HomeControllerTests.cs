@@ -6,6 +6,8 @@ using FluentAssertions;
 using NToastNotify;
 using Xunit;
 using Vaquinha.Service;
+using Vaquinha.Tests.Common.Fixtures;
+using Vaquinha.Domain.ViewModels;
 
 namespace Vaquinha.Unit.Tests.ControllerTests
 {
@@ -16,25 +18,32 @@ namespace Vaquinha.Unit.Tests.ControllerTests
         private readonly Mock<IToastNotification> _toastNotification = new Mock<IToastNotification>();
 
         private HomeController _homeController;
-        
+        private readonly HomeFixture _homeFixture;
+
         //private _homeServiceValida = 
 
-        public HomeControllerTests()
+        public HomeControllerTests(HomeFixture homeFixture)
         {
-            
+            _homeFixture = homeFixture;
         }
 
         [Fact]
-        [Trait("HomeController", "RecuperaDadosCorretamente")] 
-        public void HomeController_RecuperaDadosCorretamente()
+        [Trait("HomeController", "Index_IndexTipoValido")] 
+        public void HomeController_IndexTipoValido()
         {
             //Arrange
             _homeController = new HomeController(_logger.Object,_homeInfoService.Object, _toastNotification.Object);
             //Act
             var retorno = _homeController.Index();
             //Assert
-
-
+            retorno.Should().BeOfType<HomeViewModel>();
+        }
+        public void HomeController_IndexComDadosValidos()
+        {
+            //Act
+            var viewModelRetornado =_homeFixture.ServiceRetornaDadosValidos(_homeInfoService.Object);
+            //Assert
+            viewModelRetornado.Should().BeOfType<HomeViewModel>();
         }
     }
 }
